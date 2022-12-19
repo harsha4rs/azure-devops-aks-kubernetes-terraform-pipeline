@@ -1,5 +1,6 @@
 # Provision AKS Cluster
 # Refer the AKS Cluster github link: https://github.com/Azure/terraform-azurerm-aks#input_azure_policy_enabled
+# Refer video link: https://www.bing.com/videos/search?q=integrate+azure+ad+with+aks+cluster+through+terraform&qpvt=integrate+azure+ad+with+aks+cluster+through+terraform&view=detail&mid=6F572FBE8D4EA3D8AC1E6F572FBE8D4EA3D8AC1E&&FORM=VRDGAR&ru=%2Fvideos%2Fsearch%3Fq%3Dintegrate%2Bazure%2Bad%2Bwith%2Baks%2Bcluster%2Bthrough%2Bterraform%26qpvt%3Dintegrate%2Bazure%2Bad%2Bwith%2Baks%2Bcluster%2Bthrough%2Bterraform%26FORM%3DVDRE
 /*
 1. Add Basic Cluster Settings
   - Get Latest Kubernetes Version from datasource (kubernetes_version)
@@ -72,8 +73,9 @@ resource "azurerm_kubernetes_cluster" "aks_cluster" {
   # RBAC and Azure AD Integration Block
   azure_active_directory_role_based_access_control {
     admin_group_object_ids = [azuread_group.aks_administrators.object_id]
-    azure_rbac_enabled     = true
+    azure_rbac_enabled     = var.rbac_aad_azure_rbac_enabled
     managed                = true
+    tenant_id = var.rbac_aad_tenant_id
   }
   # Windows Profile
   windows_profile {

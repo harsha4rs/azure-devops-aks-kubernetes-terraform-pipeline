@@ -33,6 +33,19 @@ variable "ssh_public_key" {
   description = "This variable defines the SSH Public Key for Linux k8s Worker nodes"
 }
 
+# rback enabled
+variable "rbac_aad_azure_rbac_enabled" {
+  type        = bool
+  description = "(Optional) Is Role Based Access Control based on Azure AD enabled?"
+  default     = null
+}
+
+# rback tenant id
+variable "rbac_aad_tenant_id" {
+  type        = string
+  description = "(Optional) The Tenant ID used for Azure Active Directory Application. If this isn't specified the Tenant ID of the current Subscription is used."
+  default     = null
+}
 # Windows Admin Username for k8s worker nodes
 variable "windows_admin_username" {
   type        = string
