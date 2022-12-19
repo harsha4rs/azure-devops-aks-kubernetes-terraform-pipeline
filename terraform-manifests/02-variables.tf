@@ -43,7 +43,7 @@ variable "rbac_aad_azure_rbac_enabled" {
 # rback tenant id
 variable "rbac_aad_tenant_id" {
   type        = string
-  description = "(Optional) The Tenant ID used for Azure Active Directory Application. If this isn't specified the Tenant ID of the current Subscription is used."
+  description = "The Tenant ID used for Azure Active Directory Application. If this isn't specified the Tenant ID of the current Subscription is used."
   default     = null
 }
 # Windows Admin Username for k8s worker nodes
