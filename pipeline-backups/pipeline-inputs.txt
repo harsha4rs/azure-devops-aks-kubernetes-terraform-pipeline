@@ -9,7 +9,7 @@ terraform-manifests
 
 # System Default Working Directory
 $(System.DefaultWorkingDirectory)/terraform-manifests
-$(Pipeline.Workspace)/terraform-manifests-out
+$(Pipeline.Workspace)/terraform-manifests
 # List Files
 - bash: echo Contents in Pipeline Workspace Artifact Directory; ls -Ra $(System.DefaultWorkingDirectory)/terraform-manifests
 --------------------------------------------
@@ -20,12 +20,12 @@ $(DEV_ENVIRONMENT)
 aks-$(DEV_ENVIRONMENT).tfstate
 
 # Pipeline Working Directory
-$(Pipeline.Workspace)/terraform-manifests-out
+$(Pipeline.Workspace)/terraform-manifests
 
 # Dev Command Arguments for Terraform Plan
 -var ssh_public_key=$(sshkey.secureFilePath) 
 -var environment=$(DEV_ENVIRONMENT) 
--out $(Pipeline.Workspace)/terraform-manifests-out/$(DEV_ENVIRONMENT)-$(Build.BuildId).out
+-out $(Pipeline.Workspace)/terraform-manifests/$(DEV_ENVIRONMENT)-$(Build.BuildId).out
 
 # 1- way
 terraform plan
@@ -37,10 +37,10 @@ terraform apply v1plan.out
 
 
 # Dev Command Arguments for Terraform Apply
-$(Pipeline.Workspace)/terraform-manifests-out/$(DEV_ENVIRONMENT)-$(Build.BuildId).out
+$(Pipeline.Workspace)/terraform-manifests/$(DEV_ENVIRONMENT)-$(Build.BuildId).out
 
 # List Files
-- bash: echo Contents in Pipeline Workspace Artifact Directory; ls -Ra $(Pipeline.Workspace)/terraform-manifests-out    
+- bash: echo Contents in Pipeline Workspace Artifact Directory; ls -Ra $(Pipeline.Workspace)/terraform-manifests    
 --------------------------------------------
 # Environment Name
 $(QA_ENVIRONMENT)
@@ -49,14 +49,14 @@ $(QA_ENVIRONMENT)
 aks-$(QA_ENVIRONMENT).tfstate
 
 # Pipeline Working Directory
-$(Pipeline.Workspace)/terraform-manifests-out
+$(Pipeline.Workspace)/terraform-manifests
 
 # QA Command Arguments for Terraform Plan
 -var ssh_public_key=$(sshkey.secureFilePath) 
 -var environment=$(QA_ENVIRONMENT) 
--out $(Pipeline.Workspace)/terraform-manifests-out/$(QA_ENVIRONMENT)-$(Build.BuildId).out
+-out $(Pipeline.Workspace)/terraform-manifests/$(QA_ENVIRONMENT)-$(Build.BuildId).out
 
 # QA Command Arguments for Terraform Apply
-$(Pipeline.Workspace)/terraform-manifests-out/$(QA_ENVIRONMENT)-$(Build.BuildId).out
+$(Pipeline.Workspace)/terraform-manifests/$(QA_ENVIRONMENT)-$(Build.BuildId).out
 --------------------------------------------
 
