@@ -78,7 +78,7 @@ stages:
                   displayName: Terraform Iitialize
                   inputs:
                     command: 'init'
-                    workingDirectory: '$(Pipeline.Workspace)/terraform-manifests-out'
+                    workingDirectory: '$(Pipeline.Workspace)/terraform-manifests'
                     backendType: 'azurerm'
                     backendServiceArm: 'terraform-aks-azurerm-svc-con'
                     backendAzureRmResourceGroupName: 'terraform-storage-rg'
@@ -90,15 +90,15 @@ stages:
                   displayName: Terraform Plan
                   inputs:
                     command: 'plan'
-                    workingDirectory: '$(Pipeline.Workspace)/terraform-manifests-out'
-                    commandOptions: '-var ssh_public_key=$(sshkey.secureFilePath) -var environment=$(DEV_ENVIRONMENT) -out $(Pipeline.Workspace)/terraform-manifests-out/$(DEV_ENVIRONMENT)-$(Build.BuildId).out'
+                    workingDirectory: '$(Pipeline.Workspace)/terraform-manifests'
+                    commandOptions: '-var ssh_public_key=$(sshkey.secureFilePath) -var environment=$(DEV_ENVIRONMENT) -out $(Pipeline.Workspace)/terraform-manifests/$(DEV_ENVIRONMENT)-$(Build.BuildId).out'
                     allowTelemetryCollection: false
                 - task: TerraformCLI@0
                   displayName: Terraform Apply
                   inputs:
                     command: 'apply'
-                    workingDirectory: '$(Pipeline.Workspace)/terraform-manifests-out'
-                    commandOptions: '$(Pipeline.Workspace)/terraform-manifests-out/$(DEV_ENVIRONMENT)-$(Build.BuildId).out'
+                    workingDirectory: '$(Pipeline.Workspace)/terraform-manifests'
+                    commandOptions: '$(Pipeline.Workspace)/terraform-manifests/$(DEV_ENVIRONMENT)-$(Build.BuildId).out'
                     allowTelemetryCollection: false
                 
                 
