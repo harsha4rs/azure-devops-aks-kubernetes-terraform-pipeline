@@ -34,7 +34,9 @@ resource "azurerm_kubernetes_cluster" "aks_cluster" {
   }
 
 # Identity (System Assigned or Service Principal)
-  identity { type = "SystemAssigned" }
+  identity { 
+    type = "SystemAssigned" 
+  }
 
 # Adding oms_agent for log analytics workspace
   oms_agent {
@@ -43,7 +45,7 @@ resource "azurerm_kubernetes_cluster" "aks_cluster" {
 
 # RBAC and Azure AD Integration Block
   azure_active_directory_role_based_access_control {
-    admin_group_object_ids = [azuread_group.aks-administrators.object_id]
+    admin_group_object_ids = [azuread_group.aks_administrators.object_id]
     azure_rbac_enabled     = true
     managed                = true
   } 
