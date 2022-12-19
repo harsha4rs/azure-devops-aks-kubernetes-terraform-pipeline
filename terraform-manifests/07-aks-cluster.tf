@@ -35,11 +35,12 @@ resource "azurerm_kubernetes_cluster" "aks_cluster" {
   role_based_access_control_enabled = true
   azure_policy_enabled              = true
 
+
   default_node_pool {
     name                 = "systempool"
     vm_size              = "Standard_DS2_v2"
-    orchestrator_version = data.azurerm_kubernetes_service_versions.current.latest_version
     zones                = [1, 2, 3]
+    orchestrator_version = data.azurerm_kubernetes_service_versions.current.latest_version
     enable_auto_scaling  = true
     max_count            = 3
     min_count            = 1
@@ -62,7 +63,7 @@ resource "azurerm_kubernetes_cluster" "aks_cluster" {
   # Identity (System Assigned or Service Principal)
   identity {
     type = "SystemAssigned"
-  } 
+  }
 
   # Adding oms_agent for log analytics workspace
   oms_agent {
